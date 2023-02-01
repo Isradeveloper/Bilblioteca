@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Listar Libros
+{% endblock title %}
+
+
+{% block body %}
+
+  <form method="get"> {% csrf_token %}
+    <input type="text" name="kword" id="kword" placeholder="Buscar autor">
+    <input type="date" name="fecha1" id="fecha1">
+    <input type="date" name="fecha2" id="fecha2">
+    <select name="categoria" id="categoria">
+      <option value="no" disabled selected>Seleccione una categoria</option>
+      {% for categoria in categorias %}
+        <option value="{{categoria.id}}">{{categoria}}</option>
+      {% endfor %}
+        
+    </select>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+  </form>
+
+  <ul>
+    {% for libro in libros %}
+      <li>{{libro.titulo}} - {{libro.fecha_lanzamiento}}</li>
+    {% endfor %}
+  </ul>
+
+
+{% endblock body %}

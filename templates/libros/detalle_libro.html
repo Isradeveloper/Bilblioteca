@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Detalle {{libro.titulo}}
+{% endblock title %}
+
+
+{% block body %}
+
+<h1>DETALLE {{libro.titulo}}</h1>
+<p>{{libro.titulo}}</p>
+<p>{{libro.categoria}}</p>
+<p>{{libro.fecha_lanzamiento}}</p>
+<p>{{libro.visitas}}</p>
+
+<p>******************************************************</p>
+
+
+{% for autor in libro.autores.all %}
+  <p>{{autor.nombres}} {{autor.apellidos}}</p>
+{% endfor %}
+  
+
+
+{% endblock body %}
