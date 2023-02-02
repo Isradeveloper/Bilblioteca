@@ -36,7 +36,7 @@ class Prestamo(models.Model):
   """Model definition for Prestamo."""
 
   # TODO: Define fields here
-  libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
+  libro = models.ForeignKey(Libro, on_delete=models.CASCADE, related_name='libro_prestamo')
   lector = models.ForeignKey(Lector, on_delete=models.CASCADE)
   fecha_prestamo = models.DateField('Fecha de prestamo', auto_now=False, auto_now_add=False, blank=False)
   fecha_devolucion = models.DateField('Fecha de devolución', auto_now=False, auto_now_add=False, blank=True)

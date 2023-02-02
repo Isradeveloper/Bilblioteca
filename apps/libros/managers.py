@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Count
 
 class LibroManager(models.Manager):
   """ Managers para el módelo autor """
@@ -33,6 +33,12 @@ class LibroManager(models.Manager):
     libro.autores.add(autor_id)
     return libro
 
+  def libro_num_prestamos(self):
+    resultado = self.aggregate(
+      num_prestamos = Count('libro_prestamo')
+    )
+    return resultado
+
 class CategoriaManager(models.Manager):
 
   def categoria_por_autor(self, id_autor):
@@ -40,3 +46,9 @@ class CategoriaManager(models.Manager):
     return self.filter(
       categoria_libro__autores__id = id_autor
     ).distinct()
+
+  def libros_por_categoria(self):
+    resultado = self.annotate(
+      num_libros = Count('categoria_libro')
+    )
+    return resultado
